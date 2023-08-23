@@ -16,4 +16,5 @@ for (let i = 0; i < list.length; i++) {
     const element = list[i];
     console.log(`for loop result : ${element}`);    
 }
+// new
 
