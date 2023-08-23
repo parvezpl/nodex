@@ -12,8 +12,8 @@ const data =list.forEach((element)=> {
 });
 console.log(data);
 
-// for (let i = 0; i < list.length; i++) {
-//     const element = list[i];
-//     console.log(`for loop result : ${element}`);    
-// }
+for (let i = 0; i < list.length; i++) {
+    const element = list[i];
+    console.log(`for loop result : ${element}`);    
+}
 
