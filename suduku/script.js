@@ -49,6 +49,7 @@ const cell48=document.getElementById('cell-47');
 const cell49=document.getElementById('cell-48');
 const cell50=document.getElementById('cell-49');
 const cell51=document.getElementById('cell-50');
+const allcell=document.getElementById('grid');
 
 
 
