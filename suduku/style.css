@@ -20,12 +20,12 @@ body {
     width: 48px;
     height: 48px;
     font-size: 24px;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     outline: none;
   }
 
   input:disabled {
-    background-color: #EEEEEE;
+    background-color: #ffffff;
   }
 
   #cell-0,  #cell-1,  #cell-2  { border-top:    2px solid #000000; }

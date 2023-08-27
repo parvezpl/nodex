@@ -67,8 +67,8 @@ let workingCellNumber=0;
 // Event listeners.................................................................
 
 allbox.addEventListener( 'input', function(e) {
-    console.log(e.target.value);
-    console.log(e.target.id);
+    // console.log(e.target.value);
+    // console.log(e.target.id);
     validateOneBox();
 
 });
