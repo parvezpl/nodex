@@ -1,5 +1,5 @@
 // 
-let id=3;
+// let id=3;
 // if (id !== 1 && id !== 2 && id !== 3){
 //     console.log("cell1");
 // }
@@ -53,3 +53,6 @@ let id=3;
 
     
 // }
+
+
+
