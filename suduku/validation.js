@@ -56,3 +56,47 @@
 
 
 
+
+
+
+// const numsp= num.splice(2,6);
+// console.log("spline:",numsp);
+// console.log(num);
+
+
+// const num=[1,2,3,4,5,6,7,8,9];
+// const newNum=[];
+    // const givenNum=2;
+    
+    // for (let i = 0; i < num.length; i++) {
+    //     const element = num[i];
+
+    //     newNum.push(num[i])
+    // }
+// let nn= num.filter((num1)=>(num1===4) );
+// if (nn) { const spn=num.splice(num.indexOf(nn[0]), 1); 
+//         newNum.push(spn[0]);
+
+// }
+    
+// console.log(newNum);
+// console.log(num);
+
+// for (const givenNum in num) {
+//     newNum.push(num[givenNum])
+
+// console.log("find", newNum);
+
+// const xa = [1,2,3,4,5,6,7,8,9];
+// let i= 1;
+// // let xx= xa.filter(x => x===1 || x===4);
+// // let xx=xa.map((x)=>(x==2))
+// for (let i = 0; i < xa.length; i++) {
+    
+    
+// }
+
+// console.log(xx);
+// console.log(checke);
+
+// if (a in xa){ console.log("find");}

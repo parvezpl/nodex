@@ -9,18 +9,42 @@ const filledCell=[];
 const allcellid =[];
 let numbers;
 
+const num=[1,2,3,4,5,6,7,8,9];
+let remaing=[];
+const newNum=[];
+
 allcell.addEventListener('input', function(e){
     const tcellid= e.target.id;
     targetCell(tcellid); // send cell id in function
     boxFillinNuberGenrater(tcellid);
     cellLock(e.target);
-    firstBoxFilling();
-    secoundtBoxFilling();
-    thirdtBoxFilling();
-    fourthtBoxFilling();
-    fifthtBoxFilling();
+    let cellnum= Number(e.target.value)
+
+    let cn=newNum.filter((num)=>(num===cellnum))[0];
+    if (!cn) {
+        let nn= num.filter((num1)=>(num1===cellnum))[0];
+        if (nn) { const spn=num.splice(num.indexOf(nn), 1); 
+            newNum.push(spn[0]);
+        }
+        console.log(cn, 'cn');
+    }
+
+    
+    console.log(newNum);
+    console.log(num);
+
+
+    // firstBoxFilling();
+    // secoundtBoxFilling();
+    // thirdtBoxFilling();
+    // fourthtBoxFilling();
+    // fifthtBoxFilling();
+    // sixthtBoxFilling();
+    // seventhtBoxFilling();
+    // eitthtBoxFilling();
+    // ninethtBoxFilling();
     // console.log(tcellid);
-    console.log(allcellid); 
+    // console.log(allcellid); 
 })
 
 function targetCell(tcellid){
@@ -74,6 +98,30 @@ function rowSelection(){
     console.log(selectCell.id);
     selectCell.value =i
 }
+
+
+
+
+
+
+function boxSelection(x,i, n) {
+    let selectCell=document.querySelector(`#grid > tbody > tr:nth-child(${x}) > td:nth-child(${i})`).lastChild
+    selectCell.value =n   
+}
+
+
+// cell lock
+function cellLock(id){
+    id.style.backgroundColor ='gray'
+    id.disabled = true;
+    filledCell.push(id);
+    //console.log(filledCell,"click on cell lock");
+}
+
+function cellCleaner(params) {
+    
+}
+
 
 
 
@@ -170,7 +218,7 @@ function fifthtBoxFilling() {
                 list.push({i,x});   
             }
         }
-        for (let z = 27; z < 54; z++) {
+        for (let z = 30; z < 57; z++) {
             
             for (let v = 0; v <3; v++) {
                 boxSelection(list[z+v].i, list[z+v].x, n4);
@@ -179,24 +227,80 @@ function fifthtBoxFilling() {
             }
             z=z+8;     
         }
+       console.log(box5cells," box5cells");
+}
+
+
+// sixth tbox filing
+function sixthtBoxFilling() {
+        for (let i = 1; i <=9; i++) {
+            for (let x = 1;  x <=9;x++) {
+                list.push({i,x});   
+            }
+        }
+        for (let z = 33; z < 60; z++) {
+            
+            for (let v = 0; v <3; v++) {
+                boxSelection(list[z+v].i, list[z+v].x, n5);
+                box6cells.push(list[z+v].i, list[z+v]);
+                n5+=1;
+            }
+            z=z+8;     
+        }
+       console.log("box6cells");
+}
+
+// seventh tbox filing
+function seventhtBoxFilling() {
+        for (let i = 1; i <=9; i++) {
+            for (let x = 1;  x <=9;x++) {
+                list.push({i,x});   
+            }
+        }
+        for (let z = 54; z < 74; z++) {
+            
+            for (let v = 0; v <3; v++) {
+                boxSelection(list[z+v].i, list[z+v].x, n6);
+                box7cells.push(list[z+v].i, list[z+v]);
+                n6+=1;
+            }
+            z=z+8;     
+        }
        
 }
-
-
-function boxSelection(x,i, n) {
-    let selectCell=document.querySelector(`#grid > tbody > tr:nth-child(${x}) > td:nth-child(${i})`).lastChild
-    selectCell.value =n   
+// eitth tbox filing
+function eitthtBoxFilling() {
+        for (let i = 1; i <=9; i++) {
+            for (let x = 1;  x <=9;x++) {
+                list.push({i,x});   
+            }
+        }
+        for (let z = 57; z < 77; z++) {
+            
+            for (let v = 0; v <3; v++) {
+                boxSelection(list[z+v].i, list[z+v].x, n7);
+                box8cells.push(list[z+v].i, list[z+v]);
+                n7+=1;
+            }
+            z=z+8;     
+        }
+       
 }
-
-
-// cell lock
-function cellLock(id){
-    id.style.backgroundColor ='gray'
-    id.disabled = true;
-    filledCell.push(id);
-    console.log(filledCell,"click on cell lock");
-}
-
-function cellCleaner(params) {
-    
+// nineth tbox filing
+function ninethtBoxFilling() {
+        for (let i = 1; i <=9; i++) {
+            for (let x = 1;  x <=9;x++) {
+                list.push({i,x});   
+            }
+        }
+        for (let z = 60; z < 80; z++) {
+            
+            for (let v = 0; v <3; v++) {
+                boxSelection(list[z+v].i, list[z+v].x, n8);
+                box9cells.push(list[z+v].i, list[z+v]);
+                n8+=1;
+            }
+            z=z+8;     
+        }
+       
 }
