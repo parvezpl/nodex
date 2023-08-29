@@ -1,102 +1,83 @@
-// 
-// let id=3;
-// if (id !== 1 && id !== 2 && id !== 3){
-//     console.log("cell1");
+const cellxy=document.getElementById('grid');
+let listx= [];
+let g=1;
+let cellWithxy=[];
+let cellsNubmer=[];
+
+function columnSelection(i,x){
+     let selectCell=document.querySelector(`#grid > tbody > tr:nth-child(${x}) > td:nth-child(${i})`).lastChild
+     selectCell.value =x;
+}
+// row wise selection************************************************
+function rowSelection(x,i){
+    let selectCell=document.querySelector(`#grid > tbody > tr:nth-child(${x}) > td:nth-child(${i})`).lastChild
+    selectCell.value =i;
+}
+
+// x y genatare and pur to cell with x y
+function cellXYgenrater(tcellid) {
+    for (let i = 1; i <=9; i++) {
+        for (let x = 1;  x <=9;x++) {
+            if ((cellWithxy.length)<81) {
+                cellWithxy.push({i,x});
+                rowSelectionAllcell(i,x);
+            }
+            // console.log("new" ,cellWithxy.length);
+        }    
+    } 
+}
+
+// row wise selection all cell and push to************************************************
+function rowSelectionAllcell(x,i){
+    let selectCell=document.querySelector(`#grid > tbody > tr:nth-child(${x}) > td:nth-child(${i})`).lastChild
+    cellsNubmer.push(selectCell.id);
+    // console.log(selectCell.id);
+    // selectCell.value =i;
+}
+
+// cellXYgenrater()
+// click event ..................................................
+cellxy.addEventListener('input', function(e){
+    const tcellid= e.target.id;
+    const tcellVelue=e.target.value;
+    // targetCell(tcellid); // send cell id in function
+    cellXYgenrater(tcellid)
+    let c=cellWithxy[cellsNubmer.indexOf(tcellid)];
+    console.log("cell",tcellid,tcellVelue, c);
+    xyPositonValue(c.i,c.x);
+
+})
+
+
+// cell x, y  position 
+function xyPositonValue(x,y) {
+    for (let i = 1; i <=9; i++) {
+        columnSelection(y,i);
+        rowSelection(x,i);     
+    }
+}
+
+
+
+
+// function boxSelection(x,i, n) {
+//     console.log(`box ${x}, ${i}, ${n}`);
+//     let selectCell=document.querySelector(`#grid > tbody > tr:nth-child(${x}) > td:nth-child(${i})`).lastChild
+//     selectCell.value =n ;  
 // }
 
-// if (!(id in [1,2,3])){
-//     console.log("cell1");
-// }
-// console.log(`id;${id} and ${typeof id}`);
-// if (id || id ===0){
-//     console.log("not");
-// }else{
-//     console.log("find");}
-
-// if (id ==1,2,3) {
-//     console.log("found");
-// }
-
-// let list=[];
-// let list9=[];
-// let box=[];
-// for (let i = 1; i <=9; i++) {
-//     for (let x = 1;  x <=9;x++) {
-//         list.push({i,x});   
+// function firstBoxFilling() {
+//     for (let i = 1; i <=9; i++) {
+//         for (let x = 1;  x <=9;x++) {
+//             listx.push({i,x});   
+//         }
+//     }
+//     for (let z = 0; z < 27; z++) { 
+//         for (let v = 0; v <3; v++) {
+//             boxSelection(listx[z+v].i, listx[z+v].x, g);
+//             // box1cells.push(list[z+v].i, list[z+v]);
+//             g+=1;
+//         }
+//         z=z+8;     
 //     }
 // }
-// // console.log(list);
-
-// for (let z = 0; z < 27; z++) {
-//     for (let v = 0; v <3; v++) {
-//         console.log(z+v);
-//         list9.push(list[z+v]);
-         
-//     }
-//     z=z+9;    
-// }
-
-// console.log(list9,"good");
-
-// for (let z = 0; z < 27; z++) {
-//     for (let v = 0; v <3; v++) {
-//         // console.log(z+v);
-//         list9.push(list[z+v]);
-//     }
-
-//     z=z+8;
-// }
-// console.log(list9,"good");
-
-
-// for (let t = 0; t < 3; t++) {
-
-    
-// }
-
-
-
-
-
-
-// const numsp= num.splice(2,6);
-// console.log("spline:",numsp);
-// console.log(num);
-
-
-// const num=[1,2,3,4,5,6,7,8,9];
-// const newNum=[];
-    // const givenNum=2;
-    
-    // for (let i = 0; i < num.length; i++) {
-    //     const element = num[i];
-
-    //     newNum.push(num[i])
-    // }
-// let nn= num.filter((num1)=>(num1===4) );
-// if (nn) { const spn=num.splice(num.indexOf(nn[0]), 1); 
-//         newNum.push(spn[0]);
-
-// }
-    
-// console.log(newNum);
-// console.log(num);
-
-// for (const givenNum in num) {
-//     newNum.push(num[givenNum])
-
-// console.log("find", newNum);
-
-// const xa = [1,2,3,4,5,6,7,8,9];
-// let i= 1;
-// // let xx= xa.filter(x => x===1 || x===4);
-// // let xx=xa.map((x)=>(x==2))
-// for (let i = 0; i < xa.length; i++) {
-    
-    
-// }
-
-// console.log(xx);
-// console.log(checke);
-
-// if (a in xa){ console.log("find");}
