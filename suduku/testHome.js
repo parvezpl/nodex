@@ -4,6 +4,16 @@
 // ccell.value = 5;
 // ccell.lastChild.style.backgroundColor ='red';
 
+// box wise selection************************************************
+let list=[]; // cell i*x collection
+let box1cells=[],box2cells=[],box3cells=[],box4cells=[],box5cells=[],box6cells=[],box7cells=[],box8cells=[],box9cells=[];
+let list3=[]; // cell object list
+let list9=[]; // 9 box-wise selection
+let box=[];
+let n=1, n1=1, n2=1, n3=1, n4=1, n5=1, n6=1, n7=1, n8=1;
+let box1cellsId=[], box2cellsId=[], box3cellsId=[], box4cellsId=[], box5cellsId=[], box6cellsId=[], box7cellsId=[],box8cellsId=[], box9cellsId=[];
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
 const allcell=document.getElementById('grid');
 const filledCell=[];
 const allcellid =[];
@@ -11,29 +21,64 @@ let numbers;
 
 const num=[1,2,3,4,5,6,7,8,9];
 let remaing=[];
-const newNum=[];
+const box1Number=[];
 
 allcell.addEventListener('input', function(e){
     const tcellid= e.target.id;
     targetCell(tcellid); // send cell id in function
     boxFillinNuberGenrater(tcellid);
-    cellLock(e.target);
-    let cellnum= Number(e.target.value)
+    const cellnum= Number(e.target.value)
 
-    let cn=newNum.filter((num)=>(num===cellnum))[0];
-    if (!cn) {
-        let nn= num.filter((num1)=>(num1===cellnum))[0];
-        if (nn) { const spn=num.splice(num.indexOf(nn), 1); 
-            newNum.push(spn[0]);
-        }
-        console.log(cn, 'cn');
+// box one id geneter conditon if not ablabelled
+    if (box1cellsId.length===0) {
+        firstBoxFilling();
+        console.log("boxOne id", box1cellsId);
+    } else if (box2cellsId.length===0) {
+        secoundtBoxFilling();
+        console.log("boxOne id", box1cellsId);
+    } else     if (box3cellsId.length===0) {
+        thirdtBoxFilling();
+        console.log("boxOne id", box1cellsId);
+    } else     if (box4cellsId.length===0) {
+        fourthtBoxFilling();
+        console.log("boxOne id", box1cellsId);
+    } else     if (box5cellsId.length===0) {
+        fifthtBoxFilling();
+        console.log("boxOne id", box1cellsId);
+    } else     if (box6cellsId.length===0) {
+        sixthtBoxFilling();
+        console.log("boxOne id", box1cellsId);
+    } else     if (box7cellsId.length===0) {
+        seventhtBoxFilling();
+        console.log("boxOne id", box1cellsId);
+    } else     if (box8cellsId.length===0) {
+        eitthtBoxFilling(); 
+        console.log("boxOne id", box1cellsId);
+    } else     if (box9cellsId.length===0) {
+        ninethtBoxFilling();
+        console.log("boxOne id", box1cellsId);
     }
 
+// working for all box but i want to check one by one box
+
+// if clicked in box one then work
+const box1id =box1cellsId.filter((cell)=>(cell===tcellid));
+if (box1id.length) {
+    const cn=box1Number.filter((num)=>(num===cellnum))[0];
+    if (!cn) {
+        const nn= num.filter((num1)=>(num1===cellnum))[0];
+        if (nn) { const spn=num.splice(num.indexOf(nn), 1); 
+            box1Number.push(spn[0]);
+            cellLock(e.target);
+        } 
+    } else {
+            cellCleaners(e.target);
+    }
+}
+
+
+
     
-    console.log(newNum);
-    console.log(num);
-
-
     // firstBoxFilling();
     // secoundtBoxFilling();
     // thirdtBoxFilling();
@@ -46,6 +91,11 @@ allcell.addEventListener('input', function(e){
     // console.log(tcellid);
     // console.log(allcellid); 
 })
+
+function cellCleaners(clickedCell) {
+    clickedCell.value = '';    
+}
+
 
 function targetCell(tcellid){
     if(tcellid!='cell-0'){
@@ -88,7 +138,7 @@ function columnSelection(i,x){
     // console.log("i:", i,"x",x);
     let selectCell=document.querySelector(`#grid > tbody > tr:nth-child(${x}) > td:nth-child(${i})`).lastChild
     console.log(selectCell.id);
-    selectCell.value =x
+    selectCell.value =x;
 }
 
 
@@ -96,7 +146,7 @@ function columnSelection(i,x){
 function rowSelection(){
     let selectCell=document.querySelector(`#grid > tbody > tr:nth-child(${x}) > td:nth-child(${i})`).lastChild
     console.log(selectCell.id);
-    selectCell.value =i
+    selectCell.value =i;
 }
 
 
@@ -106,7 +156,13 @@ function rowSelection(){
 
 function boxSelection(x,i, n) {
     let selectCell=document.querySelector(`#grid > tbody > tr:nth-child(${x}) > td:nth-child(${i})`).lastChild
-    selectCell.value =n   
+// for cellid generation
+    box1cellsId.push(selectCell.id);    
+
+
+// for cell filling     
+    // selectCell.value =n;
+    
 }
 
 
@@ -118,22 +174,8 @@ function cellLock(id){
     //console.log(filledCell,"click on cell lock");
 }
 
-function cellCleaner(params) {
-    
-}
 
-
-
-
-// box wise selection************************************************
-let list=[]; // cell i*x collection
-let box1cells=[],box2cells=[],box3cells=[],box4cells=[],box5cells=[],box6cells=[],box7cells=[],box8cells=[],box9cells=[];
-let list3=[]; // cell object list
-let list9=[]; // 9 box-wise selection
-let box=[];
-let n=1, n1=1, n2=1, n3=1, n4=1, n5=1, n6=1, n7=1, n8=1;
-//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
+// box variables fix on top
 // firstbox filing
 function firstBoxFilling() {
         for (let i = 1; i <=9; i++) {
