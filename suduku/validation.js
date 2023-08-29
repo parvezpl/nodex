@@ -35,6 +35,30 @@ function rowSelectionAllcell(x,i){
     // selectCell.value =i;
 }
 
+// cellXYgenrater()
+// click event ..................................................
+cellxy.addEventListener('input', function(e){
+    const tcellid= e.target.id;
+    const tcellVelue=e.target.value;
+    // targetCell(tcellid); // send cell id in function
+    cellXYgenrater(tcellid)
+    let c=cellWithxy[cellsNubmer.indexOf(tcellid)];
+    console.log("cell",tcellid,tcellVelue, c);
+    xyPositonValue(c.i,c.x);
+
+})
+
+
+// cell x, y  position 
+function xyPositonValue(x,y) {
+    for (let i = 1; i <=9; i++) {
+        columnSelection(y,i);
+        rowSelection(x,i);     
+    }
+}
+
+
+
 
 // function boxSelection(x,i, n) {
 //     console.log(`box ${x}, ${i}, ${n}`);
@@ -57,33 +81,3 @@ function rowSelectionAllcell(x,i){
 //         z=z+8;     
 //     }
 // }
-
-
-
-
-// cellXYgenrater()
-// click event ..................................................
-cellxy.addEventListener('input', function(e){
-    const tcellid= e.target.id;
-    // targetCell(tcellid); // send cell id in function
-    cellXYgenrater(tcellid)
-    let c=cellWithxy[cellsNubmer.indexOf(tcellid)];
-    console.log("cell",tcellid, c);
-    xyPositonValue(c.i,c.x);
-    // console.log(cellWithxy);
-    // console.log(cellsNubmer);
-})
-
-
-// cell x, y  position 
-function xyPositonValue(x,y) {
-    for (let i = 1; i <=9; i++) {
-        columnSelection(y,i);
-        rowSelection(x,i); 
-        console.log("i", i);       
-    }
-}
-// xyPositonValue(1,3);
-// rowSelection(1,3);   
-// columnSelection(2,3);   
-// firstBoxFilling();
