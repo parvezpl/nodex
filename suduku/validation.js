@@ -105,7 +105,7 @@ function chakeBoxNumber(trget) {
 
     if (pos<9) {
         console.log("box1");
-        boxNumber(1);
+        // boxNumber(1);
     } else if(pos<18) {
         console.log("box2");
     } else if(pos<27) {
@@ -114,7 +114,7 @@ function chakeBoxNumber(trget) {
         console.log("box4");
     }  else if(pos<45) {
         console.log("box5");
-    }  else if(pos<54) {
+    }  else if(pos<54) {``
         console.log("box6");
     }  else if(pos<63) {
         console.log("box7");
@@ -124,7 +124,6 @@ function chakeBoxNumber(trget) {
         console.log("box9");
     } 
 }
-
 
 let m, l;
 function boxNumber(pr) {
@@ -172,6 +171,6 @@ function boxSelection(x,i, n) {
     if (allCellNumber.length<81) {
         allCellNumber.push(selectCell);
     }
-    // selectCell.value =n ; 
+    selectCell.value =n ;
 
 }
