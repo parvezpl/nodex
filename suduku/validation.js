@@ -1,4 +1,5 @@
 const cellxy=document.getElementById('grid');
+const click=document.getElementById('click');
 let listx= [];
 let g=1;
 let cellWithxy=[];
@@ -16,7 +17,7 @@ function xyPositonValue(trget) {
     for (let i = 1; i <=9; i++) {
         let cl =columnSelection(y,i,trget);
         let rw =rowSelection(x,i, trget);
-        console.log("cl, rw", cl, rw);
+        // console.log("cl, rw", cl, rw);
     }
     fb=[];
     fbR=[]; // for clean record num
@@ -56,7 +57,7 @@ function rowSelection(x,i,trget){
     }
     const selectCell=document.querySelector(`#grid > tbody > tr:nth-child(${x}) > td:nth-child(${i})`).lastChild
     
-    console.log(`selectCell: ${selectCell.value}, id: ${selectCell.id},click val ${clickValue}, saved ${intervalue}`);
+    // console.log(`selectCell: ${selectCell.value}, id: ${selectCell.id},click val ${clickValue}, saved ${intervalue}`);
     if (!selectCell.value.length) {// if cell empty then enter    
         // console.log("not",selectCell.id, "T",selectCell.value, clickValue); 
         return false;
@@ -96,27 +97,38 @@ function rowSelectionAllcell(x,i){
     // selectCell.value =i;
 }
 
-// click event ..................................................
-cellxy.addEventListener('input', function(e) {
+// input event ..................................................
+cellxy.addEventListener('inputt', function(e) {
     // console.log("clecked",e.target );
     stater(e.target);
     everyCell();
     intervalue=0;
 });
 
+// dbclick buto event...................... 
+cellxy.addEventListener('dblclick', function(e) {
+    console.log(e.target, intervalue);
+    e.target.value='';
+    intervalue=0;
+})
+
+//click botton event................................
+
+click.addEventListener('click', function(e) {
+    console.log(e.target.id, intervalue);
+    everyCell();
+    intervalue=0;
+})
+
+
+
 function stater(trget, n) {
-    // cellxy.addEventListener('input', function(e){
-            // console.log("e value: ", trget);
-            // const tcellid= e.target.id;
-            // const tcellid= trget.id;
-            // const trget=e.target
-            // const tcellVelue=trget.value;
             cellXYgenrater()
-            
+
             for (let numm = 1; numm <=9; numm++) {
                 boxNumber(numm);
             }
-        // send cell id in function
+            // send cell id in function
 
             let xy=xyPositonValue(trget); //  if true
             let ck=chakeBoxNumber(trget); // if true
@@ -138,7 +150,7 @@ function stater(trget, n) {
         }
             
         }    
-        // )}
+    }
 
 ///////////////////////////////  up coplited
 
@@ -307,22 +319,24 @@ function boxSelection(x,i, n) {
 // }
 
 const numberNew=[1,2,3,4,5,6,7,8,9];
+let boxAndCell=[];
 function everyCell(params) {
         for (let index = 1; index <=9; index++) {
             for (let r = 1; r <=9; r++) {
                 for (let n = 1; n <=9; n++) {
                     let selectCell=document.querySelector(`#grid > tbody > tr:nth-child(${index}) > td:nth-child(${r})`).lastChild
-                    // console.log("val",selectCell, selectCell.value); 
-                    if (!selectCell.value) {
-                        // console.log("send",selectCell.id, n);
-                        stater(selectCell, n);
-                        // console.log("s",s);
-                        // selectCell.value=n;
-                    } else {
-                        // stater(selectCell);
+                    let id=selectCell.id;
+                    if (!Boolean(selectCell.value)) {
+                        // console.log("val",selectCell.id, n, Boolean(selectCell.value));
+                        // console.log("box", Boolean(chakeBoxNumber(selectCell)));
+                        selectCell.value=n;
+                        boxAndCell.push({id,n});
+                        console.log(boxAndCell);
+                    } else if (Boolean(selectCell.value)) {
+                        console.log("find val");
                     }
-        
                 }
             }
         }    
-}    
+}
+
