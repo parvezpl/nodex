@@ -4,44 +4,79 @@ let g=1;
 let cellWithxy=[];
 let cellsNubmer=[];
 let fb=[], fbR=[];
+let dft=false, cdft=false;
 
+// cell x, y  position 
+function xyPositonValue(trget) {
 
+    let c=cellWithxy[cellsNubmer.indexOf(trget.id)];
+    let x=c.i;
+    let y=c.x;
+
+    for (let i = 1; i <=9; i++) {
+        let cl =columnSelection(y,i,trget);
+        let rw =rowSelection(x,i, trget);
+        console.log("cl, rw", cl, rw);
+    }
+    fb=[];
+    fbR=[]; // for clean record num
+    // console.log(".........");
+}
+
+let intervalue=0;
 // column wise selection************************************************
-function columnSelection(i,x,clickValue, tcellid,trget) {
+function columnSelection(i,x, trget) {
+    let clickValue =trget.value;
+    if (!intervalue) {
+        intervalue=clickValue;
+    }
      const selectCell=document.querySelector(`#grid > tbody > tr:nth-child(${x}) > td:nth-child(${i})`).lastChild
     if (!selectCell.value.length) {// if cell empty then enter
-        
+        return false;
         // console.log("not",selectCell.id, "T",selectCell.value, clickValue); 
             } 
     if (selectCell.value.length) {
-        fb.push(selectCell.value)
+        fb.push(selectCell.value);
         let fbRn1=fb.filter((nu)=>(nu===clickValue))
         // console.log("fbRn",fbRn[1], tcellid);
         if (fbRn1[1]) {
-            trget.value='';
+            trget.value=''; 
+            intervalue=0;
+            return true;
         }
-    }
+    } 
 }
 
 // row wise selection************************************************
-function rowSelection(x,i,clickValue, tcellid, trget){
+function rowSelection(x,i,trget){
+    
+    let clickValue=trget.value;
+    if (!intervalue) {
+        intervalue=clickValue;
+    }
     const selectCell=document.querySelector(`#grid > tbody > tr:nth-child(${x}) > td:nth-child(${i})`).lastChild
+    
+    console.log(`selectCell: ${selectCell.value}, id: ${selectCell.id},click val ${clickValue}, saved ${intervalue}`);
     if (!selectCell.value.length) {// if cell empty then enter    
         // console.log("not",selectCell.id, "T",selectCell.value, clickValue); 
-            } 
+        return false;
+    } 
     if (selectCell.value.length) {
         fbR.push(selectCell.value)
         let fbRn=fbR.filter((nu)=>(nu===clickValue))
         if (fbRn[1]) {
             trget.value='';
+            console.log("return true");
+            intervalue=0;
+            return true;
         }
-    }
+    } 
 }
 
 
 
 // x y genatare and pur to cell with x y
-function cellXYgenrater(tcellid) {
+function cellXYgenrater() {
     for (let i = 1; i <=9; i++) {
         for (let x = 1;  x <=9;x++) {
             if ((cellWithxy.length)<81) {
@@ -61,34 +96,49 @@ function rowSelectionAllcell(x,i){
     // selectCell.value =i;
 }
 
-// cellXYgenrater()
 // click event ..................................................
-cellxy.addEventListener('input', function(e){
-    const tcellid= e.target.id;
-    const trget=e.target
-    const tcellVelue=e.target.value;
-    // targetCell(tcellid); // send cell id in function
-    cellXYgenrater(tcellid)
-    let c=cellWithxy[cellsNubmer.indexOf(tcellid)];
-    xyPositonValue(c.i,c.x, tcellVelue, tcellid,trget);
-    for (let numm = 1; numm <=9; numm++) {
-        boxNumber(numm);
-    }
-    chakeBoxNumber(trget);
-})
+cellxy.addEventListener('input', function(e) {
+    // console.log("clecked",e.target );
+    stater(e.target);
+    everyCell();
+    intervalue=0;
+});
 
+function stater(trget, n) {
+    // cellxy.addEventListener('input', function(e){
+            // console.log("e value: ", trget);
+            // const tcellid= e.target.id;
+            // const tcellid= trget.id;
+            // const trget=e.target
+            // const tcellVelue=trget.value;
+            cellXYgenrater()
+            
+            for (let numm = 1; numm <=9; numm++) {
+                boxNumber(numm);
+            }
+        // send cell id in function
 
-// cell x, y  position 
-function xyPositonValue(x,y, tcellVelue, tcellid, trget) {
-    for (let i = 1; i <=9; i++) {
-        columnSelection(y,i, tcellVelue, tcellid, trget);
-        rowSelection(x,i, tcellVelue, tcellid, trget);     
-    }
-    fb=[];
-    fbR=[]; // for clean record num
-    console.log(".........");
-}
-
+            let xy=xyPositonValue(trget); //  if true
+            let ck=chakeBoxNumber(trget); // if true
+            // console.log("xy", xy, "ck", trget.id, ck)
+            if (intervalue) {
+                if (intervalue==trget.value) {
+                // trget.value=n;
+            }
+            
+        
+        
+            if (n) {
+            if (xy) { console.log("nn----"); 
+                if (ck) {
+                    console.log("not macht", n);
+                    // trget.value=n;
+                }
+            }       // then work with
+        }
+            
+        }    
+        // )}
 
 ///////////////////////////////  up coplited
 
@@ -101,64 +151,64 @@ let box1=[],box2=[],box3=[],
     box7=[],box8=[],box9=[];
 
 
+
 function chakeBoxNumber(trget) {
             allCellNumber.forEach((element) => {
             if (element.id==trget.id) {
-                console.log("match",allCellNumber.indexOf(element));
+                // console.log("match",allCellNumber.indexOf(element));
                 pos=allCellNumber.indexOf(element)
             }
             });
 
-    if (pos<9) {
-        console.log("box1------", trget.value);
-        if (!box1.includes(trget.value)) {
-            box1.push(trget.value)
-        } else{ trget.value='';}
-
-        // boxNumber(1);
-    } else if(pos<18) {
-        console.log("box2");
-        console.log("box2------", trget.value);
-        if (!box2.includes(trget.value)) {
-            box2.push(trget.value)
-        } else{ trget.value='';}
-    } else if(pos<27) {
-        console.log("box3");
-        if (!box3.includes(trget.value)) {
-            box3.push(trget.value)
-        } else{ trget.value='';}
-    } else if(pos<36) {
-        console.log("box4");
-        if (!box4.includes(trget.value)) {
-            box4.push(trget.value)
-        } else{ trget.value='';}
-    }  else if(pos<45) {
-        console.log("box5");
-        if (!box5.includes(trget.value)) {
-            box5.push(trget.value)
-        } else{ trget.value='';}
-    }  else if(pos<54) {``
-        console.log("box6");
-        if (!box6.includes(trget.value)) {
-            box6.push(trget.value)
-        } else{ trget.value='';}
-    }  else if(pos<63) {
-        console.log("box7");
-        if (!box7.includes(trget.value)) {
-            box7.push(trget.value)
-        } else{ trget.value='';}
-    } else if(pos<72) {
-        console.log("box8");
-        if (!box8.includes(trget.value)) {
-            box8.push(trget.value)
-        } else{ trget.value='';}
-    } else if(pos<81) {
-        console.log("box9");
-        console.log("box1------", trget.value);
-        if (!box9.includes(trget.value)) {
-            box9.push(trget.value)
-        } else{ trget.value='';}
-    } 
+            if (pos<9) { // console.log("box1");
+                if (!box1.includes(trget.value)) {
+                    console.log(pos,"posssss", box1);
+                    box1.push(trget.value);
+                    return false;
+                } else{ trget.value=''; return true; }
+                // boxNumber(1);
+            } else if (pos>8 && pos<18) {
+                // console.log("box2");
+                if (!box2.includes(trget.value)) {
+                    box2.push(trget.value);
+                } else{ trget.value=''; return true;}
+            } else if(pos>17 && pos<27) {
+                // console.log("box3");
+                if (!box3.includes(trget.value)) {
+                    box3.push(trget.value)
+                } else{ trget.value=''; return true;}
+            } else if(pos>26 &&pos<36) {
+                // console.log("box4");
+                if (!box4.includes(trget.value)) {
+                    box4.push(trget.value)
+                } else{ trget.value=''; return true;}
+            }  else if(pos>35 &&pos<45) {
+                // console.log("box5");
+                if (!box5.includes(trget.value)) {
+                    box5.push(trget.value)
+                } else { trget.value=''; return true;}
+            }  else if(pos>44 &&pos<54) {
+                // console.log("box6");
+                if (!box6.includes(trget.value)) {
+                    box6.push(trget.value)
+                } else { trget.value=''; return true;}
+            }  else if(pos>53 &&pos<63) {
+                // console.log("box7");
+                if (!box7.includes(trget.value)) {
+                    box7.push(trget.value)
+                } else { trget.value=''; return true;}
+            } else if(pos>62 &&pos<72) {
+                // console.log("box8");
+                if (!box8.includes(trget.value)) {
+                    box8.push(trget.value)
+                } else { trget.value=''; return true;}
+            } else if(pos>71 &&pos<81) {
+                // console.log("box9");
+                if (!box9.includes(trget.value)) {
+                    box9.push(trget.value)
+                    console.log("id",trget.id, "v",trget.value, "ps", pos);
+                } else { trget.value=''; return true;}
+            } 
 }
 
 
@@ -209,8 +259,9 @@ function boxSelection(x,i, n) {
         allCellNumber.push(selectCell);
     }
     // selectCell.value =n ;
-
 }
+
+
 
 ////..................................... work in progress ................................
 
@@ -230,24 +281,48 @@ function boxSelection(x,i, n) {
 //     }
 // }
 
-function fillBox(params) {
-    for (let i = 1; i <=9; i++) {
-        for (let x = 1;  x <=9;x++) {
-            newboxSelection(x,i,i)
-            // listx.push({i,x});   
-        }
-    }
-
-}
-fillBox();
-
-function newboxSelection(x,i, n) {
-    // console.log(`box ${x}, ${i}, ${n}`);
-    let selectCell=document.querySelector(`#grid > tbody > tr:nth-child(${x}) > td:nth-child(${i})`).lastChild
-    if (allCellNumber.length<81) {
-        allCellNumber.push(selectCell);
-    }
-    selectCell.value =n ;
-}
 
 
+// function fillBox(params) {
+//     for (let i = 1; i <=9; i++) {
+//         for (let x = 1;  x <=9;x++) {
+//             newboxSelection(i,x,i)
+//         }
+//     }
+
+// }
+
+// function newboxSelection(x,i, n) {
+//     let selectCell=document.querySelector(`#grid > tbody > tr:nth-child(${x}) > td:nth-child(${i})`).lastChild
+//     if (allCellNumber.length<81) {
+//         allCellNumber.push(selectCell);
+//     }
+//     // selectCell.value =n ;
+
+//     //............... looking for data ..................
+//     if (selectCell.value) {
+        
+//     }
+//     console.log("value",selectCell.value);
+// }
+
+const numberNew=[1,2,3,4,5,6,7,8,9];
+function everyCell(params) {
+        for (let index = 1; index <=9; index++) {
+            for (let r = 1; r <=9; r++) {
+                for (let n = 1; n <=9; n++) {
+                    let selectCell=document.querySelector(`#grid > tbody > tr:nth-child(${index}) > td:nth-child(${r})`).lastChild
+                    // console.log("val",selectCell, selectCell.value); 
+                    if (!selectCell.value) {
+                        // console.log("send",selectCell.id, n);
+                        stater(selectCell, n);
+                        // console.log("s",s);
+                        // selectCell.value=n;
+                    } else {
+                        // stater(selectCell);
+                    }
+        
+                }
+            }
+        }    
+}    
