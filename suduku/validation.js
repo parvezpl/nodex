@@ -9,7 +9,7 @@ let dft=false, cdft=false;
 
 // cell x, y  position 
 function xyPositonValue(trget) {
-
+    
     let c=cellWithxy[cellsNubmer.indexOf(trget.id)];
     let x=c.i;
     let y=c.x;
@@ -33,7 +33,11 @@ function columnSelection(i,x, trget) {
     }
      const selectCell=document.querySelector(`#grid > tbody > tr:nth-child(${x}) > td:nth-child(${i})`).lastChild
     if (!selectCell.value.length) {// if cell empty then enter
+        if (trget.n) {
+            // selectCell.value = trget.n;
+        }
         return false;
+        
         // console.log("not",selectCell.id, "T",selectCell.value, clickValue); 
             } 
     if (selectCell.value.length) {
@@ -43,6 +47,7 @@ function columnSelection(i,x, trget) {
         if (fbRn1[1]) {
             trget.value=''; 
             intervalue=0;
+            // everyCell();// return to click number s.........
             return true;
         }
     } 
@@ -98,7 +103,7 @@ function rowSelectionAllcell(x,i){
 }
 
 // input event ..................................................
-cellxy.addEventListener('inputt', function(e) {
+cellxy.addEventListener('input', function(e) {
     // console.log("clecked",e.target );
     stater(e.target);
     everyCell();
@@ -122,7 +127,7 @@ click.addEventListener('click', function(e) {
 
 
 
-function stater(trget, n) {
+function stater(trget) {
             cellXYgenrater()
 
             for (let numm = 1; numm <=9; numm++) {
@@ -132,23 +137,11 @@ function stater(trget, n) {
 
             let xy=xyPositonValue(trget); //  if true
             let ck=chakeBoxNumber(trget); // if true
-            // console.log("xy", xy, "ck", trget.id, ck)
+            console.log("xy", xy, "ck", trget.id, ck)
             if (intervalue) {
                 if (intervalue==trget.value) {
                 // trget.value=n;
             }
-            
-        
-        
-            if (n) {
-            if (xy) { console.log("nn----"); 
-                if (ck) {
-                    console.log("not macht", n);
-                    // trget.value=n;
-                }
-            }       // then work with
-        }
-            
         }    
     }
 
@@ -163,8 +156,14 @@ let box1=[],box2=[],box3=[],
     box7=[],box8=[],box9=[];
 
 
-
 function chakeBoxNumber(trget) {
+            // ...... if trget is a num then............//
+            // if (!isNaN(trget)) {
+            //     console.log("nim", trget);
+            // } else {
+            //     console.log("nim2", trget);
+            // }
+            
             allCellNumber.forEach((element) => {
             if (element.id==trget.id) {
                 // console.log("match",allCellNumber.indexOf(element));
@@ -218,7 +217,7 @@ function chakeBoxNumber(trget) {
                 // console.log("box9");
                 if (!box9.includes(trget.value)) {
                     box9.push(trget.value)
-                    console.log("id",trget.id, "v",trget.value, "ps", pos);
+                    // console.log("id",trget.id, "v",trget.value, "ps", pos);
                 } else { trget.value=''; return true;}
             } 
 }
@@ -318,25 +317,55 @@ function boxSelection(x,i, n) {
 //     console.log("value",selectCell.value);
 // }
 
+
+
 const numberNew=[1,2,3,4,5,6,7,8,9];
 let boxAndCell=[];
 function everyCell(params) {
+        boxAndCell=[];
         for (let index = 1; index <=9; index++) {
             for (let r = 1; r <=9; r++) {
-                for (let n = 1; n <=9; n++) {
+                for (let value = 1; value <=9; value++) {
                     let selectCell=document.querySelector(`#grid > tbody > tr:nth-child(${index}) > td:nth-child(${r})`).lastChild
+                    let val=selectCell.value;
                     let id=selectCell.id;
                     if (!Boolean(selectCell.value)) {
+                        // ..... working 3 cell in one box......
+                        if (index ===1 && r<4) {
+                            let dic={id};
+                            stater(dic);
+                        console.log("val",dic, Boolean(selectCell.value));
+                        // selectCell.value=n;
+
+                        
+                        }
+                        
+
                         // console.log("val",selectCell.id, n, Boolean(selectCell.value));
                         // console.log("box", Boolean(chakeBoxNumber(selectCell)));
-                        selectCell.value=n;
-                        boxAndCell.push({id,n});
-                        console.log(boxAndCell);
+                        // selectCell.value=n
+                                    //................ when value is ablable then..........//
+                        // ........chake condetion ..............//
+                        // ....... box, row, column ...conditon chake........//
+                        // ......... if find then break loop ............//
+                        // stater(selectCell, n);
+                        // chakeRow(selectCell, n);
+                        // chakeColumn(selectCell, n);
+                        // chakeBox(selectCell, n);
+                        // .........if not find then fil value in cell .......//
+                        // selectCell.value=n;
+                        break; // when break loop n break.........
+
+                        // if (boxAndCell.length<720) {
+                        //     boxAndCell.push({id,n,val});
+                        // }
                     } else if (Boolean(selectCell.value)) {
-                        console.log("find val");
+                        boxAndCell.push({id,val})
+                        console.log("find value", boxAndCell);
+                        break;
                     }
                 }
             }
-        }    
+        }   //console.log(boxAndCell); 
 }
 
