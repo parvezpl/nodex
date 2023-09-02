@@ -17,9 +17,9 @@ function xyPositonValue(trget) {
     let y=c.x;
 
     for (let i = 1; i <=9; i++) {
-        let cl =columnSelection(y,i,trget);
-        let rw =rowSelection(x,i, trget);
-        // console.log("cl, rw", cl, rw);
+        columnSelection(y,i,trget);
+        rowSelection(x,i, trget);
+        
     }
     fb=[];
     fbR=[]; // for clean record num
@@ -34,9 +34,12 @@ function columnSelection(i,x, trget) {
         intervalue=clickValue;
     }
      const selectCell=document.querySelector(`#grid > tbody > tr:nth-child(${x}) > td:nth-child(${i})`).lastChild
+     console.log("in",selectCell.id, selectCell.value,",",intervalue, clickValue);
     if (!selectCell.value.length) {// if cell empty then enter
         if (trget.n) {
             // selectCell.value = trget.n;
+        } else{
+            // selectCell.value='';
         }
         sudu= false;
         
@@ -49,7 +52,9 @@ function columnSelection(i,x, trget) {
         if (fbRn1[1]) {
             trget.value=''; 
             intervalue=0;
-            // everyCell();// return to click number s.........
+
+
+
             sudu= true;
         }
     } 
